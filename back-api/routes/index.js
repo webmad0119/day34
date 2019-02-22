@@ -6,14 +6,14 @@ const Butterfly = require("../models/Butterfly");
 router.get('/', (req, res, next) => {
   Butterfly.find()
   .then(butterflies => res.status(200).json({data: butterflies}))
-  .catch(err => console.log(err));
+  .catch(err => res.status(500).json({data: err}));
 });
 
 router.post("/new", (req, res, next) => {
   const {name, color} = req.body;
 
   Butterfly.create({name, color})
-  .then(butterfly => res.status(404).json({data: butterfly}))
+  .then(butterfly => res.status(200).json({data: butterfly}))
   .catch(err => console.log(err));
 })
 
